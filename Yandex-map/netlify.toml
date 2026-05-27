@@ -1,3 +1,3 @@
 [build]
-  command = "npm run build"
-  publish = ".netlify/static"
+  command = "npm run build && find . -name '*.html' -not -path '*/node_modules/*' | head -20"
+  publish = ".output/public"
