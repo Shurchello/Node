@@ -17,8 +17,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    '/': { ssr: false }
-  },
+  '/': { prerender: true }
+},
 
   compatibilityDate: '2025-01-15',
 vite: {
