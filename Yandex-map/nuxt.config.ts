@@ -1,3 +1,4 @@
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -16,14 +17,8 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  // Меняем режим с статического на серверный
-  ssr: true,
-  
-  nitro: {
-    preset: 'netlify',  // Вместо netlify-static
-    prerender: {
-      routes: []  // Очищаем, ничего не принудительно генерируем
-    }
+  routeRules: {
+    '/': { prerender: true }
   },
 
   compatibilityDate: '2025-01-15',

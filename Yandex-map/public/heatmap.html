@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тепловая карта — тест</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; }
+        #map { width: 100%; height: 80vh; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        h2 { margin-top: 0; }
+        .info { margin-bottom: 16px; color: #555; }
+    </style>
+</head>
+<body>
+    <h2>🏥 Тепловая карта медицинских организаций</h2>
+    <div class="info">Радиус = 30 | Вес точек = 8–15</div>
+    <div id="map"></div>
+
+    <script src="https://api-maps.yandex.ru/v3/?apikey=c7f3ba44-8c30-4715-bed2-9331e6fe6d7a&lang=ru_RU&mode=heatmap"></script>
+    <script>
+        ymaps3.ready.then(() => {
+            const { YMap, YMapDefaultSchemeLayer, YMapHeatmapLayer } = ymaps3;
+
+            const map = new YMap(document.getElementById('map'), {
+                location: { center: [37.617644, 55.755819], zoom: 10 }
+            });
+
+            map.addLayer(new YMapDefaultSchemeLayer());
+
+            // Это ваши данные — координаты медицинских учреждений
+            const hospitals = [
+                { coordinates: [37.617634, 55.751244], weight: 10 },
+                { coordinates: [37.602602, 55.743265], weight: 8 },
+                { coordinates: [37.582879, 55.765895], weight: 15 },
+                { coordinates: [37.647972, 55.776123], weight: 12 },
+                { coordinates: [37.624750, 55.733334], weight: 9 }
+            ];
+
+            const heatmapLayer = new YMapHeatmapLayer({
+                data: hospitals,
+                radius: 30,
+                opacity: 0.75,
+                colorStops: [
+                    { stop: 0.0, color: 'rgba(0, 100, 255, 0.2)' },
+                    { stop: 0.4, color: 'rgba(0, 200, 255, 0.6)' },
+                    { stop: 0.6, color: 'rgba(255, 255, 0, 0.8)' },
+                    { stop: 1.0, color: 'rgba(255, 50, 0, 1)' }
+                ]
+            });
+
+            map.addLayer(heatmapLayer);
+            console.log('✅ Тепловая карта загружена');
+        }).catch(e => console.error('Ошибка инициализации:', e));
+    </script>
+</body>
+</html>
