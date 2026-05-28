@@ -16,15 +16,16 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  //routeRules: {
-  //  '/': { prerender: true },
-   // '/heatmap-test': { prerender: true }  
-  //},
+  // Меняем режим с статического на серверный
+  ssr: true,
+  
   nitro: {
+    preset: 'netlify',  // Вместо netlify-static
     prerender: {
-      routes: ['/', '/heatmap-test']
+      routes: []  // Очищаем, ничего не принудительно генерируем
     }
   },
+
   compatibilityDate: '2025-01-15',
 
   vite: {
