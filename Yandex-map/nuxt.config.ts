@@ -16,11 +16,15 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  routeRules: {
-    '/': { prerender: true },
-    '/heatmap-test': { prerender: true }  
+  //routeRules: {
+  //  '/': { prerender: true },
+   // '/heatmap-test': { prerender: true }  
+  //},
+  nitro: {
+    prerender: {
+      routes: ['/', '/heatmap-test']
+    }
   },
-
   compatibilityDate: '2025-01-15',
 
   vite: {
